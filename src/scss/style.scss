@@ -1,0 +1,20 @@
+body {
+    background-color: red;
+    background-image: url("@img/meme.png");
+    div {
+        background-color: blue;
+    }
+}
+
+@media (max-width:768px) {
+    span {
+        font-size: 20px;
+    }
+}
+
+@media (max-width:768px) {
+    div {
+        font-size: 20px;
+        display: grid;
+    }
+}

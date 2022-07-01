@@ -1,0 +1,24 @@
+.no-webp body {
+  background-image: url("../img/meme.png"); }
+
+body {
+  background-color: red;
+}
+
+body div {
+  background-color: blue;
+}
+
+@media (max-width: 768px) {
+  span {
+    font-size: 20px;
+  }
+
+  div {
+    font-size: 20px;
+    display: -ms-grid;
+    display: grid;
+  }
+}
+
+.webp body { background-image: url(../img/meme.webp); }
