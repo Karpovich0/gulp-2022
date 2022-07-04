@@ -10,9 +10,12 @@ export const html = () => {
                 massage: "Error: <%= error.message %>"
             })))
         .pipe(fileInclude()) // u can insert html templates
-        .pipe(app.plugins.replace(/@img\//g, "img/")) //repair files paths to avoid some problems that will apear during work with fileInclude
-        .pipe(webpHtmlNosvg())
-        .pipe(
+        .pipe(app.plugins.replace(/@img\//g, "img/")) //repair files paths to avoid some problems that will apear during work with fileInclude        
+        .pipe(app.plugins.if(
+            app.isBuild, webpHtmlNosvg()
+        ))
+        .pipe(app.plugins.if(
+            app.isBuild,
             versionNumber({
                 "value": "%DT%",
                 "append": {
@@ -24,7 +27,7 @@ export const html = () => {
                 },
                 "output": { "file": "gulp/version.json" }
             })
-        )
+        ))
         .pipe(app.gulp.dest(app.path.build.html))
         .pipe(app.plugins.browsersync.stream());
 }

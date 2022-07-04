@@ -1,6 +1,7 @@
-body {
-    background-color: red;
-    background-image: url("@img/meme.png");
+@import "fonts";
+main {
+    background: url("@img/meme.png");
+    background-repeat: repeat;
     div {
         background-color: blue;
     }
