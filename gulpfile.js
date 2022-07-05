@@ -26,6 +26,8 @@ import { js } from "./gulp/tasks/js.js";
 import { images } from "./gulp/tasks/images.js";
 import { otfToTtf, ttfToWoff, fontsStyle } from "./gulp/tasks/fonts.js";
 import { svgSprite } from "./gulp/tasks/svgSprite.js";
+import { zip } from "./gulp/tasks/zip.js";
+import { ftp } from "./gulp/tasks/ftp.js";
 
 // watch changes
 function watcher() {
@@ -38,12 +40,22 @@ function watcher() {
 
 export { svgSprite };
 
+// process fonts
 const fonts = gulp.series(otfToTtf, ttfToWoff, fontsStyle);
 
 const mainTask = gulp.series(fonts, gulp.parallel(copy, html, scss, js, images));
 
 // build scenarios of executing tasks
 const dev = gulp.series(reset, mainTask, gulp.parallel(watcher, server));
+const build = gulp.series(reset, mainTask);
+const deployZip = gulp.series(reset, mainTask, zip);
+const deployFtp = gulp.series(reset, mainTask, ftp);
+
+// export scenarios
+export { dev };
+export { build };
+export { deployZip };
+export { deployFtp };
 
 //executing default scenario
 gulp.task("default", dev);
